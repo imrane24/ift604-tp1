@@ -15,12 +15,13 @@ public class Serveur {
 		try {
 		
 			//choix du port pour socket
-			serverSocket = new ServerSocket(10000);
+			serverSocket = new ServerSocket(6666);
 			
 			while (true) {
 		
 				try {
 					final Socket socket = serverSocket.accept();
+					System.out.println("client connecte");
 					service.execute(new Runnable(){
 		
 						@Override
