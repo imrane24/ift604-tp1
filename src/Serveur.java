@@ -15,8 +15,9 @@ public class Serveur {
 		ServerSocket serverSocket = null;
 		try {
 		
+			//choix du port pour socket
 			serverSocket = new ServerSocket(10000);
-			int i = 0;
+			
 			while (true) {
 		
 				try {
