@@ -8,8 +8,6 @@ import java.util.concurrent.Executors;
 public class Serveur {
 	public static void main(String[] args){
 
-		        //On se sert d'un pool de thread pour limiter le nombre de threads
-		        //en mémoire
 		final ExecutorService service = Executors.newFixedThreadPool(100);
 		
 		ServerSocket serverSocket = null;
@@ -22,14 +20,21 @@ public class Serveur {
 		
 				try {
 					final Socket socket = serverSocket.accept();
-		                                //On traite la requète via notre executor
 					service.execute(new Runnable(){
 		
 						@Override
 						public void run() {
 							//TODO
 							//Reponse au client
-							//traitementRequete(socket);
+							traitementRequete(socket);
+							//fin de la connexion
+							try {
+								socket.close();
+							} catch (IOException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							
 						}
 					});
 				} 
@@ -49,5 +54,9 @@ public class Serveur {
 			     e.printStackTrace();
 			}
 		}
+	}
+	
+	public static void traitementRequete(Socket socket){
+		
 	}
 }
