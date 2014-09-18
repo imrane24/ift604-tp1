@@ -3,15 +3,20 @@ package ca.udes.ift604.tp1.server;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
+import java.net.SocketException;
 
 public class Request implements Runnable
 {
-    final static byte buffer[] = new byte[1024];
-    private final DatagramSocket socket;
+    private byte buffer[] = new byte[1024];
+    private final DatagramPacket requestPacket;
+    private final DatagramSocket serverSocket;
 
-    public Request(DatagramSocket socket)
+    public Request(DatagramSocket serverSocket, DatagramPacket requestPacket)
+            throws SocketException
     {
-        this.socket = socket;
+        this.requestPacket = requestPacket;
+        this.serverSocket = serverSocket;
+        System.out.println("Nouvelles requettes");
     }
 
     @Override
@@ -19,20 +24,22 @@ public class Request implements Runnable
     {
         try
         {
-            DatagramPacket packet = new DatagramPacket(buffer, buffer.length);
-            socket.receive(packet);
-            
             // Gerer les requetes !
-            
+            System.out.println("Données : "
+                    + new String(requestPacket.getData()));
+
+            String msg = new String("Voilà ma réponse ;-) ");
+            buffer = msg.getBytes();
+
+            // Reponse au client
+            DatagramPacket reply = new DatagramPacket(buffer, buffer.length,
+                    requestPacket.getAddress(), requestPacket.getPort());
+            serverSocket.send(reply);
+
         } catch (IOException e)
         {
-            // TODO Auto-generated catch block
+            System.err.println("Error Request");
             e.printStackTrace();
         }
-        finally{
-            socket.close();
-        }
-
     }
-
 }

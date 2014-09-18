@@ -9,24 +9,44 @@ public class ClientUDP
 {
     private final DatagramSocket clientSocket;
     private InetAddress serverAddress;
+    private int serverPort;
+    private String msg;
+    private static final int size = 1024;
 
-    public ClientUDP(InetAddress serverAddress, int port) throws IOException
+    static byte sendBuffer[] = new byte[size];
+
+    public ClientUDP(InetAddress serverAddress, int serverPort, String msg)
+            throws IOException
     {
-        clientSocket = new DatagramSocket(port);
+        clientSocket = new DatagramSocket();
         this.serverAddress = serverAddress;
+        this.serverPort = serverPort;
+        this.msg = msg;
     }
 
     public void start()
     {
         try
         {
-            byte[] msg = new byte[1024];
-            // TODO Requete à faire
-            DatagramPacket request = new DatagramPacket(msg, msg.length,
-                    serverAddress, clientSocket.getPort());
+            System.out.println("Client Start");
 
+            sendBuffer = msg.getBytes();
+            // Requete à faire
+            DatagramPacket request = new DatagramPacket(sendBuffer,
+                    sendBuffer.length, serverAddress, serverPort);
+
+            clientSocket.send(request);
+
+            // Reponse du serveur
+            byte[] receiveBuffer = new byte[size];
+            DatagramPacket replyServer = new DatagramPacket(receiveBuffer,
+                    receiveBuffer.length);
+            clientSocket.receive(replyServer);
+            System.out.println("Reponse du serveur : "
+                    + new String(replyServer.getData()));
         } catch (Exception e)
         {
+            System.err.println("Error Client");
             e.printStackTrace();
         } finally
         {
