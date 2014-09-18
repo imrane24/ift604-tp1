@@ -8,8 +8,8 @@ import java.util.concurrent.Executors;
 
 public class Server {
 	public static void main(String[] args){
-
-		final ExecutorService service = Executors.newFixedThreadPool(100);
+	    int proc = Runtime.getRuntime().availableProcessors();
+		final ExecutorService service = Executors.newFixedThreadPool(proc);
 		
 		ServerSocket serverSocket = null;
 		try {
@@ -28,7 +28,7 @@ public class Server {
 						public void run() {
 							//TODO
 							//Reponse au client
-							traitementRequete(socket);
+							processRequest(socket);
 							//fin de la connexion
 							try {
 								socket.close();
@@ -58,7 +58,7 @@ public class Server {
 		}
 	}
 	
-	public static void traitementRequete(Socket socket){
+	public static void processRequest(Socket socket){
 		
 	}
 }
