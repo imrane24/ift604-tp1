@@ -1,4 +1,4 @@
-package Classe;
+package ca.udes.ift604.tp1.match;
 
 public class Chrono
 {
@@ -7,12 +7,12 @@ public class Chrono
     |*							Constructeurs							*|
     \*------------------------------------------------------------------*/
 
-    public Chrono(long tempsTotal)
+    public Chrono(long timeTotal)
     {
-        enFonctionnement = false;
-        tempsDebut = -1;
-        tempsEcoule = 0;
-        this.tempsTotal = tempsTotal;
+        isRunning = false;
+        timeStart = -1;
+        timeRunnig = 0;
+        this.timeTotal = timeTotal;
     }
 
     /*------------------------------------------------------------------*\
@@ -21,27 +21,27 @@ public class Chrono
 
     public void start()
     {
-        enFonctionnement = true;
-        tempsDebut = System.currentTimeMillis();
+        isRunning = true;
+        timeStart = System.currentTimeMillis();
     }
 
     public void pause()
     {
-        enFonctionnement = false;
-        tempsEcoule += System.currentTimeMillis() - tempsDebut;
+        isRunning = false;
+        timeRunnig += System.currentTimeMillis() - timeStart;
     }
 
     public void reset()
     {
-        enFonctionnement = false;
-        tempsDebut = -1;
-        tempsTotal = -1;
-        tempsEcoule = 0;
+        isRunning = false;
+        timeStart = -1;
+        timeTotal = -1;
+        timeRunnig = 0;
     }
 
-    public boolean isEcoule()
+    public boolean isFinish()
     {
-        if (getTempsEcoule() >= tempsTotal)
+        if (getTimeRunning() >= timeTotal)
         {
             return true;
         } else
@@ -58,20 +58,20 @@ public class Chrono
     |*				Get				*|
     \*------------------------------*/
 
-    public long getTempsEcoule()
+    public long getTimeRunning()
     {
-        if (enFonctionnement == true)
+        if (isRunning == true)
         {
-            return System.currentTimeMillis() - tempsDebut;
+            return System.currentTimeMillis() - timeStart;
         } else
         {
-            return tempsEcoule;
+            return timeRunnig;
         }
     }
 
-    public boolean isEnFonctionnement()
+    public boolean isRunning()
     {
-        return enFonctionnement;
+        return isRunning;
     }
 
     /*------------------------------------------------------------------*\
@@ -83,8 +83,8 @@ public class Chrono
     \*------------------------------------------------------------------*/
 
     // Tools
-    private long tempsDebut;
-    private long tempsEcoule;
-    private long tempsTotal;
-    private boolean enFonctionnement;
+    private long timeStart;
+    private long timeRunnig;
+    private long timeTotal;
+    private boolean isRunning;
 }

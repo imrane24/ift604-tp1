@@ -1,4 +1,4 @@
-package Client;
+package ca.udes.ift604.tp1.client;
 
 import java.io.IOException;
 import java.net.InetAddress;
