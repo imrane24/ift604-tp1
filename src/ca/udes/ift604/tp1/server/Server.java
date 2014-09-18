@@ -11,8 +11,7 @@ public class Server
     public static void main(String[] args)
     {
 
-        int proc = Runtime.getRuntime().availableProcessors();
-        final ExecutorService service = Executors.newFixedThreadPool(proc);
+        final ExecutorService service = Executors.newFixedThreadPool(100);
 
         ServerSocket serverSocket = null;
         try
@@ -36,7 +35,7 @@ public class Server
                         {
                             // TODO
                             // Reponse au client
-                            processRequest(socket);
+                            traitementRequete(socket);
                             // fin de la connexion
                             try
                             {
@@ -69,8 +68,9 @@ public class Server
         }
     }
 
-    public static void processRequest(Socket socket)
+    public static void traitementRequete(Socket socket)
     {
 
     }
+
 }
