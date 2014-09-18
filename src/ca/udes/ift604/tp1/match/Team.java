@@ -1,6 +1,9 @@
 package ca.udes.ift604.tp1.match;
 
-public class Team
+import java.io.Serializable;
+
+@SuppressWarnings("serial")
+public class Team implements Serializable
 {
 
     private String name;

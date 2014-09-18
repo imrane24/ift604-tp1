@@ -1,8 +1,10 @@
 package ca.udes.ift604.tp1.match;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Match
+@SuppressWarnings("serial")
+public class Match implements Serializable
 {
 
     /*------------------------------------------------------------------*\
@@ -14,9 +16,9 @@ public class Match
     private Team team2;
     private int goalTeam1;
     private int goalTeam2;
-    private int penaltyTeam1; // nombre de joueur penalise en temps reel
+    private int penaltyTeam1;  // nombre de joueur penalise en temps reel
     private int penaltyTeam2;
-    private int period; // seulement 1, 2 ou 3
+    private int period;        // seulement 1, 2 ou 3
     private StateMatch state;
 
     public enum StateMatch
@@ -47,39 +49,45 @@ public class Match
 
     public void team1Goal()
     {
-        goalTeam1 = goalTeam1++;
+        goalTeam1++;
     }
 
     public void team2Goal()
     {
-        goalTeam2 = goalTeam2++;
+        goalTeam2++;
     }
 
     public void team1Penalty()
     {
-        penaltyTeam1 = penaltyTeam1++;
+        penaltyTeam1++;
     }
 
     public void team2Penalty()
     {
-        penaltyTeam2 = penaltyTeam2++;
+        penaltyTeam2++;
     }
 
     public void team1EndPenalty()
     {
-        penaltyTeam1 = penaltyTeam1--;
+        if (penaltyTeam1 > 0)
+        {
+            penaltyTeam1--;
+        }
     }
 
     public void team2EndPenalty()
     {
-        penaltyTeam2 = penaltyTeam2--;
+        if (penaltyTeam2 > 0)
+        {
+            penaltyTeam2--;
+        }
     }
 
     public void nextPeriod()
     {
         if (period <= 3)
         {
-            period = period++;
+            period++;
         } else
         {
             System.out.println("Fin du match");
@@ -95,6 +103,34 @@ public class Match
     public void restart()
     {
         this.state = StateMatch.JEU;
+    }
+
+    @Override
+    public String toString()
+    {
+        StringBuilder builder = new StringBuilder();
+        builder.append("Match :\nEquipes : ");
+        builder.append(team1.getName());
+        builder.append(" - ");
+        builder.append(team2.getName());
+
+        builder.append("\nMatch du ");
+        builder.append(date.toString());
+
+        builder.append("\nPeriod : ");
+        builder.append(period);
+
+        builder.append("\nScore : ");
+        builder.append(goalTeam1);
+        builder.append(" - ");
+        builder.append(goalTeam2);
+
+        builder.append("\nPenalités : ");
+        builder.append(penaltyTeam1);
+        builder.append(" - ");
+        builder.append(penaltyTeam2);
+        builder.append("\n");
+        return builder.toString();
     }
 
     /*------------------------------*\

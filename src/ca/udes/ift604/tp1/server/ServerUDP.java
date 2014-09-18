@@ -30,8 +30,7 @@ public class ServerUDP
         {
             while (true)
             {
-                DatagramPacket requestPacket = new DatagramPacket(buffer,
-                        buffer.length);
+                DatagramPacket requestPacket = new DatagramPacket(buffer, buffer.length);
                 serverSocket.receive(requestPacket);
                 pool.execute(new Request(serverSocket, requestPacket));
             }

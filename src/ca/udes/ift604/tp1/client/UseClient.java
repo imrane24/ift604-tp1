@@ -1,7 +1,6 @@
 package ca.udes.ift604.tp1.client;
 
 import java.io.IOException;
-import java.net.Inet4Address;
 import java.net.InetAddress;
 
 public class UseClient
@@ -11,9 +10,9 @@ public class UseClient
 
         try
         {
-            String ipServer = new String();
-            InetAddress ip = Inet4Address.getByName(ipServer);
-            ClientUDP client1 = new ClientUDP(ip, 8888, "Ma première requette");
+            // String ipServer = new String("localhost");
+            // InetAddress ip = InetAddress.getByName(ipServer);
+            ClientUDP client1 = new ClientUDP(InetAddress.getLocalHost(), 8888);
             client1.start();
 
         } catch (IOException e)
