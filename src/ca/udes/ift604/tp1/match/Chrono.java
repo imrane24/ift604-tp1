@@ -61,6 +61,7 @@ public class Chrono implements Serializable
     |*				Get				*|
     \*------------------------------*/
 
+    // Temps ecoulé
     public long getTimeRunning()
     {
         if (isRunning == true)
@@ -70,6 +71,12 @@ public class Chrono implements Serializable
         {
             return timeRunnig;
         }
+    }
+
+    // Temps restant
+    public long getTimeLeft()
+    {
+        return timeTotal - getTimeRunning();
     }
 
     public boolean isRunning()

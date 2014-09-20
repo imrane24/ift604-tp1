@@ -113,7 +113,14 @@ public class Match implements Serializable
 
     public boolean endPeriod()
     {
-        return (chrono.isFinish());
+        if (chrono.isFinish())
+        {
+            chrono.reset();
+            return true;
+        } else
+        {
+            return false;
+        }
     }
 
     @Override
@@ -130,7 +137,13 @@ public class Match implements Serializable
 
         builder.append("\nPeriod : ");
         builder.append(period);
-
+        builder.append("\nTemps restant : ");
+        long millis = chrono.getTimeLeft();
+        int min = (int) (millis / 60000);
+        millis -= (min * 60000);
+        int sec = (int) ((millis / 1000) % 60);
+        builder.append(min + ":" + sec);
+        // TODO Probleme temps pas transmi serveur
         builder.append("\nScore : ");
         builder.append(goalTeam1);
         builder.append(" - ");
@@ -222,12 +235,12 @@ public class Match implements Serializable
     {
         return chrono;
     }
- 
+
     public String getName()
     {
         return name;
     }
-    
+
     public StateMatch getStateMatch()
     {
         return state;
