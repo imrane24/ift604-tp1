@@ -59,7 +59,7 @@ public class ClientUDP
             clientSocket.receive(sizeListPacket);
 
             int sizeList = (Integer) Tools.deserealizer(sizeListPacket.getData());
-            
+
             // On reçoit la liste complete
             listMatch = new ArrayList<Match>();
             for (int i = 0; i < sizeList; i++)
@@ -79,6 +79,11 @@ public class ClientUDP
         {
             clientSocket.close();
         }
+    }
+
+    public List<Match> getListMatch()
+    {
+        return listMatch;
     }
 
     public Match getMatch(String nomMatch)

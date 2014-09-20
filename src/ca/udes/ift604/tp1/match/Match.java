@@ -143,7 +143,7 @@ public class Match implements Serializable
         millis -= (min * 60000);
         int sec = (int) ((millis / 1000) % 60);
         builder.append(min + ":" + sec);
-        // TODO Probleme temps pas transmi serveur
+
         builder.append("\nScore : ");
         builder.append(goalTeam1);
         builder.append(" - ");
