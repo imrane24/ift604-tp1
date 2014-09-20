@@ -16,10 +16,12 @@ public class Match implements Serializable
     private Team team2;
     private int goalTeam1;
     private int goalTeam2;
-    private int penaltyTeam1;  // nombre de joueur penalise en temps reel
+    private int penaltyTeam1; // nombre de joueur penalise en temps reel
     private int penaltyTeam2;
-    private int period;        // seulement 1, 2 ou 3
+    private int period; // seulement 1, 2 ou 3
     private StateMatch state;
+    private Chrono chrono;
+    private String name;
 
     public enum StateMatch
     {
@@ -30,16 +32,18 @@ public class Match implements Serializable
     |*                          Constructeurs                           *|
     \*------------------------------------------------------------------*/
 
-    public Match(Date date, Team team1, Team team2)
+    public Match(Date date, Team team1, Team team2, String name)
     {
         this.date = date;
         this.team1 = team1;
         this.team2 = team2;
+        this.name = name;
         goalTeam1 = 0;
         goalTeam2 = 0;
         penaltyTeam1 = 0;
         penaltyTeam2 = 0;
         period = 1;
+        chrono = new Chrono(1200000); // 20 minutes par périodes
         state = StateMatch.SUSPENDU;
     }
 
@@ -97,12 +101,19 @@ public class Match implements Serializable
 
     public void pause()
     {
+        chrono.pause();
         this.state = StateMatch.SUSPENDU;
     }
 
-    public void restart()
+    public void start()
     {
+        chrono.start();
         this.state = StateMatch.JEU;
+    }
+
+    public boolean endPeriod()
+    {
+        return (chrono.isFinish());
     }
 
     @Override
@@ -207,6 +218,16 @@ public class Match implements Serializable
         return date;
     }
 
+    public Chrono getChrono()
+    {
+        return chrono;
+    }
+ 
+    public String getName()
+    {
+        return name;
+    }
+    
     public StateMatch getStateMatch()
     {
         return state;

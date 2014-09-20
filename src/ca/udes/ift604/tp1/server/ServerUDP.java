@@ -9,11 +9,19 @@ import java.util.concurrent.Executors;
 
 public class ServerUDP
 {
+    /*------------------------------------------------------------------*\
+    |*                          Attributs Private                       *|
+    \*------------------------------------------------------------------*/
+    
     private final DatagramSocket serverSocket;
     private final ExecutorService pool;
 
     static byte buffer[] = new byte[1024];
 
+    /*------------------------------------------------------------------*\
+    |*                          Constructeurs                           *|
+    \*------------------------------------------------------------------*/
+    
     public ServerUDP(int port, int poolSize) throws IOException
     {
         InetAddress local = InetAddress.getLocalHost();
@@ -23,6 +31,10 @@ public class ServerUDP
 
         System.out.println("Mon adress : " + local);
     }
+    
+    /*------------------------------------------------------------------*\
+    |*                          Methodes Public                         *|
+    \*------------------------------------------------------------------*/
 
     public void start()
     {

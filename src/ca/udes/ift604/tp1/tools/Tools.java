@@ -13,7 +13,7 @@ public class Tools
 {
     public static byte[] serealizer(Serializable serializable) throws IOException
     {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream(1024);
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
         BufferedOutputStream bos = new BufferedOutputStream(baos);
         ObjectOutputStream oos = new ObjectOutputStream(bos);
 

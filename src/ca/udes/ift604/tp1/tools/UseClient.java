@@ -1,7 +1,9 @@
-package ca.udes.ift604.tp1.client;
+package ca.udes.ift604.tp1.tools;
 
 import java.io.IOException;
 import java.net.InetAddress;
+
+import ca.udes.ift604.tp1.client.ClientUDP;
 
 public class UseClient
 {

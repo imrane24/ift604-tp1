@@ -4,19 +4,23 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.SocketException;
+import java.util.Date;
 
 import ca.udes.ift604.tp1.match.Match;
+import ca.udes.ift604.tp1.match.Team;
 import ca.udes.ift604.tp1.tools.Tools;
 
 public class Request implements Runnable
 {
-    private byte buffer[] = new byte[1024];
-    private final DatagramPacket requestPacket;
+    private final DatagramPacket receivePacket;
     private final DatagramSocket serverSocket;
+
+    private static final int size = 1024;
+    static byte sendBuffer[] = new byte[size];
 
     public Request(DatagramSocket serverSocket, DatagramPacket requestPacket) throws SocketException
     {
-        this.requestPacket = requestPacket;
+        this.receivePacket = requestPacket;
         this.serverSocket = serverSocket;
         System.out.println("Nouvelles requettes");
     }
@@ -26,23 +30,37 @@ public class Request implements Runnable
     {
         try
         {
-            // Gerer les requetes !
-            // System.out.println("Données : "+ new
-            // String(requestPacket.getData()));
-
-            Match m1 = (Match) Tools.deserealizer(requestPacket.getData());
-
-            System.out.println("Serveur Dit :");
-            System.out.println(m1.toString());
-
-            String msg = new String("Voilà ma réponse ;-) ");
-            buffer = msg.getBytes();
-
+            // Reception de la requete du client
+            String request = new String(receivePacket.getData());
+            System.out.println("La requete du client : " + request);
             // Reponse au client
-            DatagramPacket reply = new DatagramPacket(buffer, buffer.length, requestPacket.getAddress(), requestPacket.getPort());
-            serverSocket.send(reply);
 
-        } catch (IOException | ClassNotFoundException e)
+            Match match1 = new Match(new Date(), new Team("Les Vikings"), new Team("Les Barbares"), "match1");
+            match1.team1Goal();
+            match1.team1Goal();
+
+            match1.team2Penalty();
+
+            match1.team2Goal();
+            match1.team1Goal();
+            match1.nextPeriod();
+
+            match1.team2EndPenalty();
+            match1.team1Penalty();
+
+            // On envoi le match choisi
+            sendBuffer = Tools.serealizer(match1);
+
+            if (request.contains("match1"))
+            {
+                DatagramPacket replyPacket = new DatagramPacket(sendBuffer, sendBuffer.length, receivePacket.getAddress(), receivePacket.getPort());
+                serverSocket.send(replyPacket);
+            } else
+            {
+                System.out.println("Pas le match 1");
+            }
+
+        } catch (IOException e)
         {
             System.err.println("Error Request");
             e.printStackTrace();

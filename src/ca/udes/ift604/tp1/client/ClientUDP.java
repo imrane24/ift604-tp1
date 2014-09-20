@@ -4,10 +4,8 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
-import java.util.Date;
 
 import ca.udes.ift604.tp1.match.Match;
-import ca.udes.ift604.tp1.match.Team;
 import ca.udes.ift604.tp1.tools.Tools;
 
 public class ClientUDP
@@ -32,34 +30,22 @@ public class ClientUDP
         {
             System.out.println("Client Start");
 
-            // *************************
-
-            Match match1 = new Match(new Date(), new Team("Les Vikings"), new Team("Les Barbares"));
-            match1.team1Goal();
-            match1.team1Goal();
-
-            match1.team2Penalty();
-
-            match1.team2Goal();
-            match1.team1Goal();
-            match1.nextPeriod();
-
-            match1.team2EndPenalty();
-            match1.team1Penalty();
-
-            sendBuffer = Tools.serealizer(match1);
-
-            // *************************
-            // Requete à faire
+            // On demande le match
+            String s = new String("match1");
+            sendBuffer = s.getBytes();
             DatagramPacket request = new DatagramPacket(sendBuffer, sendBuffer.length, serverAddress, serverPort);
 
             clientSocket.send(request);
 
             // Reponse du serveur
             byte[] receiveBuffer = new byte[size];
-            DatagramPacket replyServer = new DatagramPacket(receiveBuffer, receiveBuffer.length);
-            clientSocket.receive(replyServer);
-            System.out.println("Reponse du serveur : " + new String(replyServer.getData()));
+            DatagramPacket replyPacket = new DatagramPacket(receiveBuffer, receiveBuffer.length);
+            clientSocket.receive(replyPacket);
+
+            Match m1 = (Match) Tools.deserealizer(replyPacket.getData());
+
+            System.out.println(m1.toString());
+
         } catch (Exception e)
         {
             System.err.println("Error Client");
