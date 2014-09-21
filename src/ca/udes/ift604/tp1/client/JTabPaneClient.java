@@ -22,19 +22,22 @@ public class JTabPaneClient extends JTabbedPane
     private JPanelMatch jPanelMatch;
     private JPanelBet jPanelBet;
     private ClientUDP client;
-    private InetAddress ip = InetAddress.getByName("192.168.2.21");
+    private int portServer;
+    private InetAddress ip;
     private String nomMatch;
 
     /*------------------------------------------------------------------*\
     |*							Constructeurs							*|
     \*------------------------------------------------------------------*/
 
-    public JTabPaneClient() throws IOException
+    public JTabPaneClient(int portServer, String ipServer) throws IOException
     {
-        client = new ClientUDP(ip, 8888);
+        this.portServer = portServer;
+        ip = InetAddress.getByName(ipServer);
+        client = new ClientUDP(ip, portServer);
 
         client.start("update");
-        
+
         nomMatch = client.getListMatch().get(0).getName();
         geometry();
         control();
@@ -72,7 +75,7 @@ public class JTabPaneClient extends JTabbedPane
                 try
                 {
                     int i = getSelectedIndex();
-                    client = new ClientUDP(ip, 8888);
+                    client = new ClientUDP(ip, portServer);
                     client.start("update");
 
                     geometry();
@@ -96,7 +99,7 @@ public class JTabPaneClient extends JTabbedPane
                 try
                 {
                     int i = getSelectedIndex();
-                    client = new ClientUDP(ip, 8888);
+                    client = new ClientUDP(ip, portServer);
                     client.start("update");
 
                     geometry();
@@ -121,7 +124,7 @@ public class JTabPaneClient extends JTabbedPane
     {
         return jPanelMatch.getjButtonUpdate();
     }
-    
+
     public void setNomMatch(String nomMatch)
     {
         this.nomMatch = nomMatch;
