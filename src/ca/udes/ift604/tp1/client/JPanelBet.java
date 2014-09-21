@@ -8,6 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import ca.udes.ift604.tp1.match.Bet;
+import ca.udes.ift604.tp1.tools.ColorPalette;
 
 public class JPanelBet extends JPanel
 {
@@ -47,20 +48,13 @@ public class JPanelBet extends JPanel
 
     private void control()
     {
-        this.addComponentListener(new ComponentAdapter()
-        {
-
-            @Override
-            public void componentResized(ComponentEvent event)
-            {
-
-            }
-        });
+      
     }
 
     private void appareance()
     {
-        // RIEN
+        setBackground(ColorPalette.BACKGROUND_COLOR);
+        setForeground(ColorPalette.FOREGROUND_COLOR);
     }
 
 }

@@ -1,6 +1,8 @@
 package ca.udes.ift604.tp1.client;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.Box;
@@ -8,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import ca.udes.ift604.tp1.match.Match;
+import ca.udes.ift604.tp1.tools.ColorPalette;
 
 public class JPanelListMatch extends JPanel
 {
@@ -17,6 +20,8 @@ public class JPanelListMatch extends JPanel
 
     private List<Match> listMatch;
     private JButton jButtonUpdate;
+    private String nameMatch;
+    private boolean selectMatch;
 
     /*------------------------------------------------------------------*\
     |*							Constructeurs							*|
@@ -25,6 +30,7 @@ public class JPanelListMatch extends JPanel
     public JPanelListMatch(List<Match> listMatch)
     {
         this.listMatch = listMatch;
+        nameMatch = listMatch.get(0).getName();
         geometry();
         control();
         appareance();
@@ -45,9 +51,20 @@ public class JPanelListMatch extends JPanel
         Box boxV = Box.createVerticalBox();
 
         boxV.add(Box.createVerticalGlue());
-        for (Match element : listMatch)
+        for (final Match element : listMatch)
         {
             JButton jButton = new JButton(element.getName());
+            jButton.addActionListener(new ActionListener()
+            {
+                @Override
+                public void actionPerformed(ActionEvent event)
+                {
+                    nameMatch = element.getName();
+                    selectMatch = true;
+                }
+            });
+            jButton.setBackground(ColorPalette.BUTTON_BACKGROUND_COLOR);
+            jButton.setForeground(ColorPalette.BUTTON_FOREGROUND_COLOR);
             boxV.add(jButton);
             boxV.add(Box.createVerticalGlue());
         }
@@ -69,7 +86,11 @@ public class JPanelListMatch extends JPanel
 
     private void appareance()
     {
-        // RIEN
+        jButtonUpdate.setBackground(ColorPalette.BUTTON_BACKGROUND_COLOR);
+        jButtonUpdate.setForeground(ColorPalette.BUTTON_FOREGROUND_COLOR);
+        
+        setBackground(ColorPalette.BACKGROUND_COLOR);
+        setForeground(ColorPalette.FOREGROUND_COLOR);
     }
 
     /*------------------------------*\
@@ -79,6 +100,25 @@ public class JPanelListMatch extends JPanel
     public JButton getjButtonUpdate()
     {
         return this.jButtonUpdate;
+    }
+    
+    public String getNameMatch()
+    {
+        return this.nameMatch;
+    }
+    
+    public boolean isSelectMatch()
+    {
+        return this.selectMatch;
+    }
+    
+    /*------------------------------*\
+    |*              Set             *|
+    \*------------------------------*/
+    
+    public void setSelectMatch(boolean selectMatch)
+    {
+        this.selectMatch = selectMatch;
     }
 
 }

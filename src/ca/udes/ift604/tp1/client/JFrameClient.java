@@ -5,6 +5,8 @@ import java.io.IOException;
 
 import javax.swing.JFrame;
 
+import ca.udes.ift604.tp1.tools.ColorPalette;
+
 public class JFrameClient extends JFrame
 {
     /*------------------------------------------------------------------*\

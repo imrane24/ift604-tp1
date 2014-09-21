@@ -11,6 +11,7 @@ import javax.swing.JTabbedPane;
 import ca.udes.ift604.tp1.client.affmatch.JPanelMatch;
 import ca.udes.ift604.tp1.match.Bet;
 import ca.udes.ift604.tp1.match.User;
+import ca.udes.ift604.tp1.tools.ColorPalette;
 
 public class JTabPaneClient extends JTabbedPane
 {
@@ -24,7 +25,7 @@ public class JTabPaneClient extends JTabbedPane
     private ClientUDP client;
     private int portServer;
     private InetAddress ip;
-    private String nomMatch;
+    private String nameMatch;
 
     /*------------------------------------------------------------------*\
     |*							Constructeurs							*|
@@ -38,7 +39,7 @@ public class JTabPaneClient extends JTabbedPane
 
         client.start("update");
 
-        nomMatch = client.getListMatch().get(0).getName();
+        nameMatch = client.getListMatch().get(0).getName();
         geometry();
         control();
         appareance();
@@ -55,8 +56,8 @@ public class JTabPaneClient extends JTabbedPane
     private void geometry()
     {
         jPanelListMatch = new JPanelListMatch(client.getListMatch());
-        jPanelMatch = new JPanelMatch(client.getMatch(nomMatch));
-        jPanelBet = new JPanelBet(new Bet(client.getMatch(nomMatch), new User("pa", "Kev"), 100));
+        jPanelMatch = new JPanelMatch(client.getMatch(nameMatch));
+        jPanelBet = new JPanelBet(new Bet(client.getMatch(nameMatch), new User("pa", "Kev"), 100));
 
         removeAll();
         add("Match", jPanelMatch);
@@ -78,6 +79,11 @@ public class JTabPaneClient extends JTabbedPane
                     client = new ClientUDP(ip, portServer);
                     client.start("update");
 
+                    if (jPanelListMatch.isSelectMatch())
+                    {
+                        nameMatch = jPanelListMatch.getNameMatch();
+                        jPanelListMatch.setSelectMatch(false);
+                    }
                     geometry();
                     control();
                     appareance();
@@ -102,6 +108,7 @@ public class JTabPaneClient extends JTabbedPane
                     client = new ClientUDP(ip, portServer);
                     client.start("update");
 
+                    nameMatch = jPanelListMatch.getNameMatch();
                     geometry();
                     control();
                     appareance();
@@ -117,7 +124,8 @@ public class JTabPaneClient extends JTabbedPane
 
     private void appareance()
     {
-        // Rien
+        setBackground(ColorPalette.BACKGROUND_COLOR);
+        setForeground(ColorPalette.FOREGROUND_COLOR);
     }
 
     public JButton getjButtonUpdate()
@@ -125,8 +133,8 @@ public class JTabPaneClient extends JTabbedPane
         return jPanelMatch.getjButtonUpdate();
     }
 
-    public void setNomMatch(String nomMatch)
+    public void setNameMatch(String nameMatch)
     {
-        this.nomMatch = nomMatch;
+        this.nameMatch = nameMatch;
     }
 }

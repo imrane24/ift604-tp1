@@ -6,6 +6,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import ca.udes.ift604.tp1.match.Match;
+import ca.udes.ift604.tp1.tools.ColorPalette;
 
 public class JPanelMatch extends JPanel
 {
@@ -57,7 +58,11 @@ public class JPanelMatch extends JPanel
 
     private void appareance()
     {
-        // Rien
+        jButtonUpdate.setBackground(ColorPalette.BUTTON_BACKGROUND_COLOR);
+        jButtonUpdate.setForeground(ColorPalette.BUTTON_FOREGROUND_COLOR);
+        
+        setBackground(ColorPalette.BACKGROUND_COLOR);
+        setForeground(ColorPalette.FOREGROUND_COLOR);
     }
     
     /*------------------------------*\
