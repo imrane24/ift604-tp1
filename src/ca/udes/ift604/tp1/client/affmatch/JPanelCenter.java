@@ -49,8 +49,8 @@ public class JPanelCenter extends JPanel
     private void geometry()
     {
         jLabelTeam = new JLabel("Equipe :", JLabel.CENTER);
-        jLabelGoal = new JLabel(match.getTeam1().getName(), JLabel.CENTER);
-        jLabelPenalty = new JLabel(match.getTeam2().getName(), JLabel.CENTER);
+        jLabelGoal = new JLabel(match.getTeam1(), JLabel.CENTER);
+        jLabelPenalty = new JLabel(match.getTeam2(), JLabel.CENTER);
         jLabelTeam1 = new JLabel("Goal :", JLabel.CENTER);
         jLabelTeam2 = new JLabel(String.valueOf(match.getGoalTeam1()), JLabel.CENTER);
         jLabelGoal1 = new JLabel(String.valueOf(match.getGoalTeam2()), JLabel.CENTER);

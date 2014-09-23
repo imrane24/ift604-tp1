@@ -9,7 +9,6 @@ import java.util.Date;
 import java.util.List;
 
 import ca.udes.ift604.tp1.match.Match;
-import ca.udes.ift604.tp1.match.Team;
 import ca.udes.ift604.tp1.tools.Tools;
 
 public class ClientUDP
@@ -97,7 +96,7 @@ public class ClientUDP
         if (index == -1)
         {
             System.out.println("Erreur de la requette");
-            return new Match(new Date(), new Team("Error"), new Team("Error"), "Error");
+            return new Match(new Date(), "Error","Error", "Error");
         } else
         {
             return listMatch.get(index);

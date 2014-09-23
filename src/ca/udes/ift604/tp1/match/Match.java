@@ -12,8 +12,8 @@ public class Match implements Serializable
     \*------------------------------------------------------------------*/
 
     private Date date;
-    private Team team1;
-    private Team team2;
+    private String team1;
+    private String team2;
     private int goalTeam1;
     private int goalTeam2;
     private int penaltyTeam1; // nombre de joueur penalise en temps reel
@@ -32,7 +32,7 @@ public class Match implements Serializable
     |*                          Constructeurs                           *|
     \*------------------------------------------------------------------*/
 
-    public Match(Date date, Team team1, Team team2, String name)
+    public Match(Date date, String team1, String team2, String name)
     {
         this.date = date;
         this.team1 = team1;
@@ -129,9 +129,9 @@ public class Match implements Serializable
     {
         StringBuilder builder = new StringBuilder();
         builder.append("Match :\nEquipes : ");
-        builder.append(team1.getName());
+        builder.append(team1);
         builder.append(" - ");
-        builder.append(team2.getName());
+        builder.append(team2);
 
         builder.append("\nMatch du ");
         builder.append(date.toString());
@@ -217,12 +217,12 @@ public class Match implements Serializable
         return period;
     }
 
-    public Team getTeam1()
+    public String getTeam1()
     {
         return team1;
     }
 
-    public Team getTeam2()
+    public String getTeam2()
     {
         return team2;
     }

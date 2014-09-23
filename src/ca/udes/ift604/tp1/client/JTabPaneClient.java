@@ -145,7 +145,7 @@ public class JTabPaneClient extends JTabbedPane
                 {
                     try
                     {
-                        Thread.sleep(120000);
+                        Thread.sleep(2000);
                         updateListMatch();
                     } catch (InterruptedException e)
                     {

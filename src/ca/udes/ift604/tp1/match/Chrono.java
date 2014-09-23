@@ -66,7 +66,7 @@ public class Chrono implements Serializable
     {
         if (isRunning == true)
         {
-            return System.currentTimeMillis() - timeStart;
+            return timeRunnig + (System.currentTimeMillis() - timeStart);
         } else
         {
             return timeRunnig;

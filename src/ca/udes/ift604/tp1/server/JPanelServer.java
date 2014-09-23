@@ -12,7 +12,6 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import ca.udes.ift604.tp1.match.Match;
-import ca.udes.ift604.tp1.match.Team;
 import ca.udes.ift604.tp1.tools.ColorPalette;
 
 public class JPanelServer extends JPanel
@@ -41,9 +40,9 @@ public class JPanelServer extends JPanel
     {
 
         List<Match> maList = new ArrayList<Match>();
-        maList.add(new Match(new Date(), new Team("Bale"), new Team("Young Boys"), "match1"));
-        maList.add(new Match(new Date(), new Team("Xamax"), new Team("Schaffouse"), "match2"));
-        maList.add(new Match(new Date(), new Team("Sion"), new Team("SRD"), "match3"));
+        maList.add(new Match(new Date(), "Bale", "Young Boys", "match1"));
+        maList.add(new Match(new Date(), "Xamax", "Schaffouse", "match2"));
+        maList.add(new Match(new Date(), "Sion", "SRD", "match3"));
 
         try
         {
