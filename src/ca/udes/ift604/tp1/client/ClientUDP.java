@@ -81,6 +81,10 @@ public class ClientUDP
         }
     }
 
+    /*------------------------------*\
+    |*              Get             *|
+    \*------------------------------*/
+    
     public List<Match> getListMatch()
     {
         return listMatch;

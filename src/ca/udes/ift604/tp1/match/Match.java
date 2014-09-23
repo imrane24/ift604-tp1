@@ -87,18 +87,6 @@ public class Match implements Serializable
         }
     }
 
-    public void nextPeriod()
-    {
-        if (period <= 3)
-        {
-            period++;
-        } else
-        {
-            System.out.println("Fin du match");
-            this.state = StateMatch.FINI;
-        }
-    }
-
     public void pause()
     {
         chrono.pause();
@@ -109,18 +97,31 @@ public class Match implements Serializable
     {
         chrono.start();
         this.state = StateMatch.JEU;
-    }
 
-    public boolean endPeriod()
-    {
-        if (chrono.isFinish())
+        Thread threadChrono = new Thread(new Runnable()
         {
-            chrono.reset();
-            return true;
-        } else
-        {
-            return false;
-        }
+
+            @Override
+            public void run()
+            {
+                while (state != StateMatch.FINI)
+                {
+                    if (chrono.isRunning())
+                    {
+                        if (period < 3 && chrono.isFinish())
+                        {
+                            period++;
+                            // chrono.start();
+                        } else if (period == 3 && chrono.isFinish())
+                        {
+                            state = StateMatch.FINI;
+                            System.out.println("Fin du match");
+                        }
+                    }
+                }
+            }
+        });
+        threadChrono.start();
     }
 
     @Override

@@ -12,7 +12,7 @@ public class ColorPalette
 
 	// Base
 	public static final Color BACKGROUND_COLOR = new Color(255,142,61);
-	public static final Color FOREGROUND_COLOR = new Color(255,232,179);
+	public static final Color FOREGROUND_COLOR = new Color(251,255,81);
 	public static final Color NEUTRAL_COLOR = new Color(255, 255, 255);
 
 	// Button

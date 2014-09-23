@@ -43,6 +43,7 @@ public class JTabPaneClient extends JTabbedPane
         geometry();
         control();
         appareance();
+        runThreadUpdate();
     }
 
     /*------------------------------------------------------------------*\
@@ -67,57 +68,23 @@ public class JTabPaneClient extends JTabbedPane
 
     private void control()
     {
+        // Mise à jour par le bouton Actualiser dans Match
         jPanelMatch.getjButtonUpdate().addActionListener(new ActionListener()
         {
-
             @Override
             public void actionPerformed(ActionEvent event)
             {
-                try
-                {
-                    int i = getSelectedIndex();
-                    client = new ClientUDP(ip, portServer);
-                    client.start("update");
-
-                    if (jPanelListMatch.isSelectMatch())
-                    {
-                        nameMatch = jPanelListMatch.getNameMatch();
-                        jPanelListMatch.setSelectMatch(false);
-                    }
-                    geometry();
-                    control();
-                    appareance();
-                    setSelectedIndex(i);
-
-                } catch (IOException e)
-                {
-                    e.printStackTrace();
-                }
+                updateListMatch();
             }
         });
 
+        // Mise à jour par le bouton Actualiser dans ListMatch
         jPanelListMatch.getjButtonUpdate().addActionListener(new ActionListener()
         {
-
             @Override
             public void actionPerformed(ActionEvent event)
             {
-                try
-                {
-                    int i = getSelectedIndex();
-                    client = new ClientUDP(ip, portServer);
-                    client.start("update");
-
-                    nameMatch = jPanelListMatch.getNameMatch();
-                    geometry();
-                    control();
-                    appareance();
-                    setSelectedIndex(i);
-
-                } catch (IOException e)
-                {
-                    e.printStackTrace();
-                }
+                updateListMatch();
             }
         });
     }
@@ -136,5 +103,58 @@ public class JTabPaneClient extends JTabbedPane
     public void setNameMatch(String nameMatch)
     {
         this.nameMatch = nameMatch;
+    }
+
+    /*------------------------------------------------------------------*\
+    |*                          Methodes Private                        *|
+    \*------------------------------------------------------------------*/
+
+    private void updateListMatch()
+    {
+        try
+        {
+            int i = getSelectedIndex();
+            client = new ClientUDP(ip, portServer);
+            client.start("update");
+
+            if (jPanelListMatch.isSelectMatch())
+            {
+                nameMatch = jPanelListMatch.getNameMatch();
+                jPanelListMatch.setSelectMatch(false);
+            }
+            geometry();
+            control();
+            appareance();
+            setSelectedIndex(i);
+
+        } catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    private void runThreadUpdate()
+    {
+        // Mise à jour toutes les 2 minutes
+        new Thread(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+                while (true)
+                {
+                    try
+                    {
+                        Thread.sleep(120000);
+                        updateListMatch();
+                    } catch (InterruptedException e)
+                    {
+                        // Arret du thread
+                        Thread.currentThread().interrupt();
+                        break;
+                    }
+                }
+            }
+        }).start();
     }
 }

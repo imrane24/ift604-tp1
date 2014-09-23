@@ -38,7 +38,6 @@ public class Chrono implements Serializable
     {
         isRunning = false;
         timeStart = -1;
-        timeTotal = -1;
         timeRunnig = 0;
     }
 
@@ -46,6 +45,7 @@ public class Chrono implements Serializable
     {
         if (getTimeRunning() >= timeTotal)
         {
+            reset();
             return true;
         } else
         {

@@ -47,18 +47,7 @@ public class ServerUDP
     {
         try
         {
-            listMatch.add(new Match(new Date(), new Team("Bale"), new Team("Young Boys"), "match1"));
-            listMatch.add(new Match(new Date(), new Team("Xamax"), new Team("Schaffouse"), "match2"));
-            listMatch.add(new Match(new Date(), new Team("Sion"), new Team("Cpx"), "match3"));
-            listMatch.add(new Match(new Date(), new Team("SRD"), new Team("Les Barbares"), "match4"));
-            listMatch.add(new Match(new Date(), new Team("Kevin"), new Team("Musy"), "match5"));
-
-            scenario(0);
-            scenario(1);
-            scenario(2);
-            scenario(3);
-
-            while (true)
+             while (true)
             {
                 DatagramPacket requestPacket = new DatagramPacket(buffer, buffer.length);
                 serverSocket.receive(requestPacket);
@@ -74,6 +63,29 @@ public class ServerUDP
             pool.shutdown();
             serverSocket.close();
         }
+    }
+    
+    public void addMatch(Match match)
+    {
+        listMatch.add(match);
+    }
+
+    /*------------------------------*\
+    |*              Get             *|
+    \*------------------------------*/
+
+    public List<Match> getListMatch()
+    {
+        return listMatch;
+    }
+
+    /*------------------------------*\
+    |*              Set             *|
+    \*------------------------------*/
+
+    public void setListMatch(List<Match> listMatch)
+    {
+        this.listMatch = listMatch;
     }
 
     /*------------------------------------------------------------------*\
@@ -95,7 +107,5 @@ public class ServerUDP
             listMatch.get(i).team2EndPenalty();
             listMatch.get(i).team1Penalty();
         }
-        listMatch.get(i).nextPeriod();
-        listMatch.get(i).nextPeriod();
     }
 }
