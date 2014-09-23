@@ -10,6 +10,6 @@ public class UseJFrameClient
     public static void main(String[] args) throws IOException
     {
         // Port et adresse IP du server
-        new JFrameClient(8888, "10.238.51.88");
+        new JFrameClient(8888, "192.168.0.113");
     }
 }

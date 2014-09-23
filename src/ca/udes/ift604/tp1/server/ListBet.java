@@ -1,43 +1,66 @@
-package ca.udes.ift604.tp1.match;
+package ca.udes.ift604.tp1.server;
 
-import java.io.Serializable;
+import java.util.ArrayList;
 
-public class User implements Serializable
+public class ListBet
 {
     /*------------------------------------------------------------------*\
     |*                          Constructeurs                           *|
     \*------------------------------------------------------------------*/
-    public User(String login)
+    public ListBet()
     {
-        super();
-        this.login = login;
-
+        this.listBetTeam1 = new ArrayList<Bet>();
+        this.listBetTeam2 = new ArrayList<Bet>();
     }
 
     /*------------------------------------------------------------------*\
     |*                          Methodes Public                         *|
     \*------------------------------------------------------------------*/
-
     /*------------------------------*\
     |*              Set             *|
     \*------------------------------*/
-    public void setLogin(String login)
+    public void SetBetTeam1(Bet bet)
     {
-        this.login = login;
+        listBetTeam1.add(bet);
+        sommeTotal += bet.getBet();
+
+    }
+
+    public void SetBetTeam2(Bet bet)
+    {
+        listBetTeam2.add(bet);
+        sommeTotal += bet.getBet();
     }
 
     /*------------------------------*\
     |*              Get             *|
     \*------------------------------*/
-    public String getLogin()
+    public int getSommeTotal()
     {
-        return login;
+        return sommeTotal;
+    }
+
+    public int getSizeList1()
+    {
+        return listBetTeam1.size();
+    }
+
+    public int getSizeList2()
+    {
+        return listBetTeam2.size();
+    }
+
+    public int getSizeListTot()
+    {
+        return listBetTeam1.size() + listBetTeam2.size();
     }
 
     /*------------------------------------------------------------------*\
     |*                          Attributs Private                       *|
     \*------------------------------------------------------------------*/
 
-    private String login;
+    private ArrayList<Bet> listBetTeam1;
+    private ArrayList<Bet> listBetTeam2;
+    private int sommeTotal;
 
 }

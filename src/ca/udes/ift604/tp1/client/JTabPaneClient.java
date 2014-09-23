@@ -9,8 +9,6 @@ import javax.swing.JButton;
 import javax.swing.JTabbedPane;
 
 import ca.udes.ift604.tp1.client.affmatch.JPanelMatch;
-import ca.udes.ift604.tp1.match.Bet;
-import ca.udes.ift604.tp1.match.User;
 import ca.udes.ift604.tp1.tools.ColorPalette;
 
 public class JTabPaneClient extends JTabbedPane
@@ -58,7 +56,7 @@ public class JTabPaneClient extends JTabbedPane
     {
         jPanelListMatch = new JPanelListMatch(client.getListMatch());
         jPanelMatch = new JPanelMatch(client.getMatch(nameMatch));
-        jPanelBet = new JPanelBet(new Bet(client.getMatch(nameMatch), new User("pa", "Kev"), 100));
+        jPanelBet = new JPanelBet(client.getMatch(nameMatch));
 
         removeAll();
         add("Match", jPanelMatch);

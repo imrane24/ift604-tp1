@@ -30,6 +30,7 @@ public class JPanelServer extends JPanel
     private JButton jButtonEndPenalty2;
 
     private ServerUDP server;
+    private ServerTCP serverTCP;
     private int indexMatch = 0;
 
     /*------------------------------------------------------------------*\
@@ -46,8 +47,12 @@ public class JPanelServer extends JPanel
 
         try
         {
+            // Lance le server UDP
             server = new ServerUDP(portServer, 10);
             server.setListMatch(maList);
+            // Lance le server TCP
+            serverTCP = new ServerTCP(portServer);
+            serverTCP.start();
         } catch (IOException e)
         {
             e.printStackTrace();
