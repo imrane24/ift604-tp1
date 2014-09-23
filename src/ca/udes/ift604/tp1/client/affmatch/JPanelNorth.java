@@ -4,8 +4,6 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 
-import com.sun.org.apache.bcel.internal.generic.CPInstruction;
-
 import ca.udes.ift604.tp1.match.Match;
 import ca.udes.ift604.tp1.tools.ColorPalette;
 
@@ -74,7 +72,7 @@ public class JPanelNorth extends Box
 
     private void appareance()
     {
-       jLabelDate.setForeground(ColorPalette.FOREGROUND_COLOR);
+        jLabelDate.setForeground(ColorPalette.FOREGROUND_COLOR);
         jLabelName.setForeground(ColorPalette.FOREGROUND_COLOR);
         jLabelPeriod.setForeground(ColorPalette.FOREGROUND_COLOR);
         jLabelTime.setForeground(ColorPalette.FOREGROUND_COLOR);

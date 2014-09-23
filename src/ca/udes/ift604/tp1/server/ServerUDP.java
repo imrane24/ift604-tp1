@@ -5,13 +5,11 @@ import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import ca.udes.ift604.tp1.match.Match;
-import ca.udes.ift604.tp1.match.Team;
 
 public class ServerUDP
 {
@@ -47,7 +45,7 @@ public class ServerUDP
     {
         try
         {
-             while (true)
+            while (true)
             {
                 DatagramPacket requestPacket = new DatagramPacket(buffer, buffer.length);
                 serverSocket.receive(requestPacket);
@@ -64,7 +62,7 @@ public class ServerUDP
             serverSocket.close();
         }
     }
-    
+
     public void addMatch(Match match)
     {
         listMatch.add(match);
@@ -92,20 +90,4 @@ public class ServerUDP
     |*                          Methodes Private                        *|
     \*------------------------------------------------------------------*/
 
-    private void scenario(int i)
-    {
-        listMatch.get(i).start();
-        for (int j = 0; j < i; j++)
-        {
-            listMatch.get(i).team1Goal();
-            listMatch.get(i).team1Goal();
-
-            listMatch.get(i).team2Penalty();
-
-            listMatch.get(i).team2Goal();
-
-            listMatch.get(i).team2EndPenalty();
-            listMatch.get(i).team1Penalty();
-        }
-    }
 }

@@ -31,7 +31,6 @@ public class JPanelServer extends JPanel
     private JButton jButtonEndPenalty2;
 
     private ServerUDP server;
-    private int portServer;
     private int indexMatch = 0;
 
     /*------------------------------------------------------------------*\
@@ -40,7 +39,6 @@ public class JPanelServer extends JPanel
 
     public JPanelServer(int portServer)
     {
-        this.portServer = portServer;
 
         List<Match> maList = new ArrayList<Match>();
         maList.add(new Match(new Date(), new Team("Bale"), new Team("Young Boys"), "match1"));
@@ -49,7 +47,7 @@ public class JPanelServer extends JPanel
 
         try
         {
-            server = new ServerUDP(8888, 10);
+            server = new ServerUDP(portServer, 10);
             server.setListMatch(maList);
         } catch (IOException e)
         {

@@ -5,8 +5,6 @@ import java.io.IOException;
 
 import javax.swing.JFrame;
 
-import ca.udes.ift604.tp1.tools.ColorPalette;
-
 public class JFrameClient extends JFrame
 {
     /*------------------------------------------------------------------*\
@@ -25,7 +23,7 @@ public class JFrameClient extends JFrame
     {
         this.portServer = portServer;
         this.ipServer = ipServer;
-        
+
         geometry();
         control();
         appareance();
@@ -41,7 +39,7 @@ public class JFrameClient extends JFrame
 
     private void geometry() throws IOException
     {
-        jTabPaneClient = new JTabPaneClient(portServer,ipServer);
+        jTabPaneClient = new JTabPaneClient(portServer, ipServer);
         setLayout(new BorderLayout());
         add(jTabPaneClient);
     }

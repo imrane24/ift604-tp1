@@ -1,8 +1,6 @@
 package ca.udes.ift604.tp1.client;
 
 import java.awt.FlowLayout;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -15,7 +13,7 @@ public class JPanelBet extends JPanel
     /*------------------------------------------------------------------*\
     |*                          Attributs Private                       *|
     \*------------------------------------------------------------------*/
-    
+
     private JLabel jLabel;
     private Bet bet;
 
@@ -48,7 +46,7 @@ public class JPanelBet extends JPanel
 
     private void control()
     {
-      
+
     }
 
     private void appareance()
