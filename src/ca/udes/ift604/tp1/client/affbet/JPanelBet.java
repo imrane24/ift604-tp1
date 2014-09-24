@@ -1,4 +1,4 @@
-package ca.udes.ift604.tp1.client;
+package ca.udes.ift604.tp1.client.affbet;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -61,7 +61,6 @@ public class JPanelBet extends JPanel
 
     private JPanelNorthBet jPanelNorth;
     private JPanelCenterBet jPanelCenter;
-    private ClientTCP clientTCP;
     private JLabel jLabel;
     private Match match;
 

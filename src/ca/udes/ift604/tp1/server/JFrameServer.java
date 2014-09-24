@@ -11,16 +11,18 @@ public class JFrameServer extends JFrame
     |*                          Attributs Private                       *|
     \*------------------------------------------------------------------*/
 
-    private int portServer;
+    private int portServerUDP;
+    private int portServerTCP;
     private JPanelServer jPanelServer;
 
     /*------------------------------------------------------------------*\
     |*							Constructeurs							*|
     \*------------------------------------------------------------------*/
 
-    public JFrameServer(int portServer) throws IOException
+    public JFrameServer(int portServerUDP, int portServerTCP) throws IOException
     {
-        this.portServer = portServer;
+        this.portServerUDP = portServerUDP;
+        this.portServerTCP = portServerTCP;
 
         geometry();
         control();
@@ -37,7 +39,7 @@ public class JFrameServer extends JFrame
 
     private void geometry() throws IOException
     {
-        jPanelServer = new JPanelServer(portServer);
+        jPanelServer = new JPanelServer(portServerUDP, portServerTCP);
         setLayout(new BorderLayout());
         add(jPanelServer);
     }

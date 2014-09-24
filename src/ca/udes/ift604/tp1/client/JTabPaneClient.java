@@ -8,6 +8,7 @@ import java.net.InetAddress;
 import javax.swing.JButton;
 import javax.swing.JTabbedPane;
 
+import ca.udes.ift604.tp1.client.affbet.JPanelBet;
 import ca.udes.ift604.tp1.client.affmatch.JPanelMatch;
 import ca.udes.ift604.tp1.tools.ColorPalette;
 
@@ -20,24 +21,32 @@ public class JTabPaneClient extends JTabbedPane
     private JPanelListMatch jPanelListMatch;
     private JPanelMatch jPanelMatch;
     private JPanelBet jPanelBet;
-    private ClientUDP client;
-    private int portServer;
+
+    private int portServerUDP;
+    private int portServerTCP;
     private InetAddress ip;
+
+    private ClientUDP clientUDP;
+    private ClientTCP clientTCP;
+
     private String nameMatch;
 
     /*------------------------------------------------------------------*\
     |*							Constructeurs							*|
     \*------------------------------------------------------------------*/
 
-    public JTabPaneClient(int portServer, String ipServer) throws IOException
+    public JTabPaneClient(int portServerUDP, int portServerTCP, String ipServer) throws IOException
     {
-        this.portServer = portServer;
+        this.portServerUDP = portServerUDP;
+        this.portServerTCP = portServerTCP;
         ip = InetAddress.getByName(ipServer);
-        client = new ClientUDP(ip, portServer);
+        clientUDP = new ClientUDP(ip, portServerUDP);
+        clientUDP.start("update");
 
-        client.start("update");
+        // TODO Gerer le client TCP pour les paris ici
+        // clientTCP = new ClientTCP(ip, portServerTCP, new Bet);
 
-        nameMatch = client.getListMatch().get(0).getName();
+        nameMatch = clientUDP.getListMatch().get(0).getName();
         geometry();
         control();
         appareance();
@@ -54,9 +63,9 @@ public class JTabPaneClient extends JTabbedPane
 
     private void geometry()
     {
-        jPanelListMatch = new JPanelListMatch(client.getListMatch());
-        jPanelMatch = new JPanelMatch(client.getMatch(nameMatch));
-        jPanelBet = new JPanelBet(client.getMatch(nameMatch));
+        jPanelListMatch = new JPanelListMatch(clientUDP.getListMatch());
+        jPanelMatch = new JPanelMatch(clientUDP.getMatch(nameMatch));
+        jPanelBet = new JPanelBet(clientUDP.getMatch(nameMatch));
 
         removeAll();
         add("Match", jPanelMatch);
@@ -112,8 +121,8 @@ public class JTabPaneClient extends JTabbedPane
         try
         {
             int i = getSelectedIndex();
-            client = new ClientUDP(ip, portServer);
-            client.start("update");
+            clientUDP = new ClientUDP(ip, portServerUDP);
+            clientUDP.start("update");
 
             if (jPanelListMatch.isSelectMatch())
             {
@@ -143,7 +152,7 @@ public class JTabPaneClient extends JTabbedPane
                 {
                     try
                     {
-                        Thread.sleep(2000);
+                        Thread.sleep(120000);
                         updateListMatch();
                     } catch (InterruptedException e)
                     {

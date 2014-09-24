@@ -37,7 +37,7 @@ public class JPanelServer extends JPanel
     |*							Constructeurs							*|
     \*------------------------------------------------------------------*/
 
-    public JPanelServer(int portServer)
+    public JPanelServer(int portServerUDP, int portServerTCP)
     {
 
         List<Match> maList = new ArrayList<Match>();
@@ -47,11 +47,11 @@ public class JPanelServer extends JPanel
 
         try
         {
-            // Lance le server UDP
-            server = new ServerUDP(portServer, 10);
+            // Lance le server UDP pour les matches
+            server = new ServerUDP(portServerUDP, 10);
             server.setListMatch(maList);
-            // Lance le server TCP
-            serverTCP = new ServerTCP(portServer);
+            // Lance le server TCP pour les paris
+            serverTCP = new ServerTCP(portServerTCP);
             serverTCP.start();
         } catch (IOException e)
         {

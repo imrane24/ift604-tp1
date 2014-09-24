@@ -10,6 +10,6 @@ public class UseJFrameServer
     public static void main(String[] args) throws IOException
     {
         // Port et adresse IP du server
-        new JFrameServer(8888);
+        new JFrameServer(8000, 8002);
     }
 }

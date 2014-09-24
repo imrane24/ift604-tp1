@@ -1,4 +1,4 @@
-package ca.udes.ift604.tp1.client;
+package ca.udes.ift604.tp1.client.affbet;
 
 import java.awt.GridLayout;
 

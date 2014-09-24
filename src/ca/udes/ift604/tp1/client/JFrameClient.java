@@ -11,7 +11,8 @@ public class JFrameClient extends JFrame
     |*                          Attributs Private                       *|
     \*------------------------------------------------------------------*/
 
-    private int portServer;
+    private int portServerUDP;
+    private int portServerTCP;
     private String ipServer;
     private JTabPaneClient jTabPaneClient;
 
@@ -19,9 +20,10 @@ public class JFrameClient extends JFrame
     |*							Constructeurs							*|
     \*------------------------------------------------------------------*/
 
-    public JFrameClient(int portServer, String ipServer) throws IOException
+    public JFrameClient(int portServerUDP, int portServerTCP, String ipServerUDP) throws IOException
     {
-        this.portServer = portServer;
+        this.portServerUDP = portServerUDP;
+        this.portServerTCP = portServerTCP;
         this.ipServer = ipServer;
 
         geometry();
@@ -39,7 +41,7 @@ public class JFrameClient extends JFrame
 
     private void geometry() throws IOException
     {
-        jTabPaneClient = new JTabPaneClient(portServer, ipServer);
+        jTabPaneClient = new JTabPaneClient(portServerUDP, portServerTCP, ipServer);
         setLayout(new BorderLayout());
         add(jTabPaneClient);
     }
