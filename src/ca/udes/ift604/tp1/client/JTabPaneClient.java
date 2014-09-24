@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.InetAddress;
+import java.net.UnknownHostException;
 
 import javax.swing.JButton;
 import javax.swing.JTabbedPane;
@@ -42,9 +43,6 @@ public class JTabPaneClient extends JTabbedPane
         ip = InetAddress.getByName(ipServer);
         clientUDP = new ClientUDP(ip, portServerUDP);
         clientUDP.start("update");
-
-        // TODO Gerer le client TCP pour les paris ici
-        // clientTCP = new ClientTCP(ip, portServerTCP, new Bet);
 
         nameMatch = clientUDP.getListMatch().get(0).getName();
         geometry();
@@ -92,6 +90,23 @@ public class JTabPaneClient extends JTabbedPane
             public void actionPerformed(ActionEvent event)
             {
                 updateListMatch();
+            }
+        });
+
+        // Bouton pour valider le pari
+        jPanelBet.getjButtonValidate().addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent arg0)
+            {
+                try
+                {
+                    clientTCP = new ClientTCP(ip, portServerTCP, jPanelBet.getBet());
+                } catch (IOException e)
+                {
+                    System.err.println("Error Client TCP");
+                    e.printStackTrace();
+                }
             }
         });
     }

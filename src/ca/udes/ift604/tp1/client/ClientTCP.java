@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
@@ -17,13 +18,12 @@ public class ClientTCP
     |*                          Constructeurs                           *|
     \*------------------------------------------------------------------*/
 
-    public ClientTCP(String address, int port, Bet bet) throws UnknownHostException, IOException
+    public ClientTCP(InetAddress address, int port, Bet bet) throws UnknownHostException, IOException
     {
         this.port = port;
         this.address = address;
         this.bet = bet;
         socket = new Socket(address, port);
-
     }
 
     /*------------------------------------------------------------------*\
@@ -61,7 +61,7 @@ public class ClientTCP
 
     private Bet bet;
     private int port;
-    private String address;
+    private InetAddress address;
     private Socket socket;
     private BufferedReader in;
 }

@@ -20,7 +20,7 @@ public class JFrameClient extends JFrame
     |*							Constructeurs							*|
     \*------------------------------------------------------------------*/
 
-    public JFrameClient(int portServerUDP, int portServerTCP, String ipServerUDP) throws IOException
+    public JFrameClient(int portServerUDP, int portServerTCP, String ipServer) throws IOException
     {
         this.portServerUDP = portServerUDP;
         this.portServerTCP = portServerTCP;

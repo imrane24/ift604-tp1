@@ -16,10 +16,8 @@ public class ServerTCP
 
     public ServerTCP(int port) throws IOException
     {
-
         socket = new ServerSocket(port);
         listBet = new ListBet();
-
     }
 
     /*------------------------------------------------------------------*\

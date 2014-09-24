@@ -3,10 +3,13 @@ package ca.udes.ift604.tp1.client.affbet;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import ca.udes.ift604.tp1.match.Match;
+import ca.udes.ift604.tp1.match.User;
+import ca.udes.ift604.tp1.server.Bet;
 import ca.udes.ift604.tp1.tools.ColorPalette;
 
 public class JPanelBet extends JPanel
@@ -28,6 +31,20 @@ public class JPanelBet extends JPanel
     |*							Methodes Public							*|
     \*------------------------------------------------------------------*/
 
+    /*------------------------------*\
+    |*              Get             *|
+    \*------------------------------*/
+
+    public JButton getjButtonValidate()
+    {
+        return jPanelCenter.getjButtonValidate();
+    }
+    
+    public Bet getBet()
+    {
+        return new Bet(match, new User(jPanelCenter.getLoginBet()), jPanelCenter.getSommeBet(), jPanelCenter.getTeamBet());
+    }
+    
     /*------------------------------------------------------------------*\
     |*							Methodes Private						*|
     \*------------------------------------------------------------------*/

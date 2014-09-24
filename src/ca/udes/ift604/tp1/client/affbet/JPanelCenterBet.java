@@ -48,7 +48,7 @@ public class JPanelCenterBet extends JPanel
         jSpinner = new JSpinner(new SpinnerNumberModel(0, 0, 1000000, 1));
 
         jSpinner.setSize(100, 100);
-        jButton = new JButton("Valider Pari");
+        jButtonValidate = new JButton("Valider Pari");
         jcombobox = new JComboBox<String>();
         jcombobox.addItem(match.getTeam1());
         jcombobox.addItem(match.getTeam2());
@@ -60,7 +60,7 @@ public class JPanelCenterBet extends JPanel
         add(jSpinner);
         add(jLabelTeam);
         add(jcombobox);
-        add(jButton);
+        add(jButtonValidate);
 
     }
 
@@ -77,9 +77,9 @@ public class JPanelCenterBet extends JPanel
     |*              Get             *|
     \*------------------------------*/
 
-    public JButton getjButtonUpdate()
+    public JButton getjButtonValidate()
     {
-        return this.jButton;
+        return this.jButtonValidate;
     }
 
     public String getLoginBet()
@@ -108,7 +108,7 @@ public class JPanelCenterBet extends JPanel
     private JLabel jLabelSomme;
     private JLabel jLabelTeam;
     private JSpinner jSpinner;
-    private JButton jButton;
+    private JButton jButtonValidate;
     private JComboBox<String> jcombobox;
 
 }
