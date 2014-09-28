@@ -1,4 +1,4 @@
-package ca.udes.ift604.tp1.server;
+package ca.udes.ift604.tp1.server.affserver;
 
 import java.awt.BorderLayout;
 import java.io.IOException;
@@ -13,7 +13,7 @@ public class JFrameServer extends JFrame
 
     private int portServerUDP;
     private int portServerTCP;
-    private JPanelServer jPanelServer;
+    private JTabPaneServer jTabPaneServer;
 
     /*------------------------------------------------------------------*\
     |*							Constructeurs							*|
@@ -39,9 +39,9 @@ public class JFrameServer extends JFrame
 
     private void geometry() throws IOException
     {
-        jPanelServer = new JPanelServer(portServerUDP, portServerTCP);
+        jTabPaneServer = new JTabPaneServer(portServerUDP, portServerTCP);
         setLayout(new BorderLayout());
-        add(jPanelServer);
+        add(jTabPaneServer);
     }
 
     private void control()

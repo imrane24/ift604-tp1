@@ -2,7 +2,7 @@ package ca.udes.ift604.tp1.tools;
 
 import java.io.IOException;
 
-import ca.udes.ift604.tp1.server.JFrameServer;
+import ca.udes.ift604.tp1.server.affserver.JFrameServer;
 
 public class UseJFrameServer
 {

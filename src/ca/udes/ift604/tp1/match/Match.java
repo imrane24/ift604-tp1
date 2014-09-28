@@ -1,7 +1,9 @@
 package ca.udes.ift604.tp1.match;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @SuppressWarnings("serial")
 public class Match implements Serializable
@@ -16,6 +18,8 @@ public class Match implements Serializable
     private String team2;
     private int goalTeam1;
     private int goalTeam2;
+    private List<Goal> listGoal1;
+    private List<Goal> listGoal2;
     private int penaltyTeam1; // nombre de joueur penalise en temps reel
     private int penaltyTeam2;
     private int period; // seulement 1, 2 ou 3
@@ -40,6 +44,8 @@ public class Match implements Serializable
         this.name = name;
         goalTeam1 = 0;
         goalTeam2 = 0;
+        listGoal1 = new ArrayList<Goal>();
+        listGoal2 = new ArrayList<Goal>();
         penaltyTeam1 = 0;
         penaltyTeam2 = 0;
         period = 1;
@@ -51,14 +57,16 @@ public class Match implements Serializable
     |*                          Methodes Public                         *|
     \*------------------------------------------------------------------*/
 
-    public void team1Goal()
+    public void team1Goal(Goal goal)
     {
         goalTeam1++;
+        listGoal1.add(goal);
     }
 
-    public void team2Goal()
+    public void team2Goal(Goal goal)
     {
         goalTeam2++;
+        listGoal2.add(goal);
     }
 
     public void team1Penalty()
@@ -202,6 +210,15 @@ public class Match implements Serializable
         return goalTeam2;
     }
 
+    public List<Goal> getlistGoal1()
+    {
+        return listGoal1;
+    }
+    public List<Goal> getlistGoal2()
+    {
+        return listGoal2;
+    }
+    
     public int getPenaltyTeam1()
     {
         return penaltyTeam1;
