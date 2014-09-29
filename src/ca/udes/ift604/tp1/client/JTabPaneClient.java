@@ -4,7 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.InetAddress;
-import java.net.UnknownHostException;
 
 import javax.swing.JButton;
 import javax.swing.JTabbedPane;
@@ -22,6 +21,7 @@ public class JTabPaneClient extends JTabbedPane
     private JPanelListMatch jPanelListMatch;
     private JPanelMatch jPanelMatch;
     private JPanelBet jPanelBet;
+    private JPanelNoMatch jPanelNoMatch;
 
     private int portServerUDP;
     private int portServerTCP;
@@ -44,10 +44,17 @@ public class JTabPaneClient extends JTabbedPane
         clientUDP = new ClientUDP(ip, portServerUDP);
         clientUDP.start("update");
 
-        nameMatch = clientUDP.getListMatch().get(0).getName();
-        geometry();
-        control();
-        appareance();
+        if (clientUDP.getListMatch().size() == 0)
+        {
+            geometryNoMatch();
+        } else
+        {
+            nameMatch = clientUDP.getListMatch().get(0).getName();
+            geometry();
+            control();
+            appareance();
+        }
+
         runThreadUpdate();
     }
 
@@ -69,6 +76,21 @@ public class JTabPaneClient extends JTabbedPane
         add("Match", jPanelMatch);
         add("Liste Des Matchs", jPanelListMatch);
         add("Paris", jPanelBet);
+    }
+
+    private void geometryNoMatch()
+    {
+        jPanelNoMatch = new JPanelNoMatch();
+        removeAll();
+        add("Pas de Matchs", jPanelNoMatch);
+        jPanelNoMatch.getjButtonUpdate().addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent event)
+            {
+                updateListMatch();
+            }
+        });
     }
 
     private void control()
@@ -139,14 +161,23 @@ public class JTabPaneClient extends JTabbedPane
             clientUDP = new ClientUDP(ip, portServerUDP);
             clientUDP.start("update");
 
-            if (jPanelListMatch.isSelectMatch())
+            if (clientUDP.getListMatch().size() == 0)
             {
-                nameMatch = jPanelListMatch.getNameMatch();
-                jPanelListMatch.setSelectMatch(false);
+                geometryNoMatch();
+            } else
+            {
+//                if (jPanelListMatch.isSelectMatch())
+//                {
+//                    nameMatch = jPanelListMatch.getNameMatch();
+//                    jPanelListMatch.setSelectMatch(false);
+//                }
+                nameMatch = clientUDP.getListMatch().get(0).getName();
+
+                geometry();
+                control();
+                appareance();
             }
-            geometry();
-            control();
-            appareance();
+
             setSelectedIndex(i);
 
         } catch (IOException e)

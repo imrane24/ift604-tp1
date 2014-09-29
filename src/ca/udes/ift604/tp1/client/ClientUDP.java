@@ -83,7 +83,7 @@ public class ClientUDP
     /*------------------------------*\
     |*              Get             *|
     \*------------------------------*/
-    
+
     public List<Match> getListMatch()
     {
         return listMatch;
@@ -96,7 +96,7 @@ public class ClientUDP
         if (index == -1)
         {
             System.out.println("Erreur de la requette");
-            return new Match(new Date(), "Error","Error", "Error");
+            return new Match(new Date(), "Error", "Error", "Error");
         } else
         {
             return listMatch.get(index);

@@ -87,16 +87,8 @@ public class JTabPaneServer extends JTabbedPane
 
     private void control()
     {
-        jPanelEventMatch.getJcombobox().addActionListener(new ActionListener()
-        {
-            @Override
-            public void actionPerformed(ActionEvent event)
-            {
-                indexMatch = jPanelEventMatch.getIndexMatch();
-                update();
-            }
-        });
 
+        // Mise à jour du match en fonction des évenements
         jPanelEventMatch.getjButtonStart().addActionListener(new ActionListener()
         {
             @Override
@@ -107,6 +99,7 @@ public class JTabPaneServer extends JTabbedPane
             }
         });
 
+        // Mise à jour du match en fonction des évenements
         jPanelEventMatch.getjButtonPause().addActionListener(new ActionListener()
         {
             @Override
@@ -117,6 +110,7 @@ public class JTabPaneServer extends JTabbedPane
             }
         });
 
+        // Mise à jour du match en fonction des évenements
         jPanelEventMatch.getjButtonGoal1().addActionListener(new ActionListener()
         {
             @Override
@@ -127,6 +121,7 @@ public class JTabPaneServer extends JTabbedPane
             }
         });
 
+        // Mise à jour du match en fonction des évenements
         jPanelEventMatch.getjButtonGoal2().addActionListener(new ActionListener()
         {
             @Override
@@ -137,6 +132,7 @@ public class JTabPaneServer extends JTabbedPane
             }
         });
 
+        // Mise à jour du match en fonction des évenements
         jPanelEventMatch.getjButtonPenalty1().addActionListener(new ActionListener()
         {
             @Override
@@ -147,6 +143,7 @@ public class JTabPaneServer extends JTabbedPane
             }
         });
 
+        // Mise à jour du match en fonction des évenements
         jPanelEventMatch.getjButtonPenalty2().addActionListener(new ActionListener()
         {
             @Override
@@ -157,6 +154,7 @@ public class JTabPaneServer extends JTabbedPane
             }
         });
 
+        // Mise à jour du match en fonction des évenements
         jPanelEventMatch.getjButtonEndPenalty1().addActionListener(new ActionListener()
         {
             @Override
@@ -167,6 +165,7 @@ public class JTabPaneServer extends JTabbedPane
             }
         });
 
+        // Mise à jour du match en fonction des évenements
         jPanelEventMatch.getjButtonEndPenalty2().addActionListener(new ActionListener()
         {
             @Override
@@ -186,6 +185,7 @@ public class JTabPaneServer extends JTabbedPane
                 listMatch.add(new Match(jPanelCreateMatch.getDate(), jPanelCreateMatch.getTeam1(), jPanelCreateMatch.getTeam2(), jPanelCreateMatch
                         .getNameMatch()));
                 update();
+                controlJcombobox();
             }
         });
 
@@ -195,6 +195,20 @@ public class JTabPaneServer extends JTabbedPane
     {
         setBackground(ColorPalette.BACKGROUND_COLOR);
         setForeground(ColorPalette.FOREGROUND_COLOR);
+    }
+
+    private void controlJcombobox()
+    {
+        // Selection des matchs à modifier
+        jPanelEventMatch.getJcombobox().addActionListener(new ActionListener()
+        {
+            @Override
+            public void actionPerformed(ActionEvent event)
+            {
+                indexMatch = jPanelEventMatch.getIndexMatch();
+                update();               
+            }
+        });
     }
 
     /*------------------------------------------------------------------*\
@@ -213,13 +227,14 @@ public class JTabPaneServer extends JTabbedPane
                 {
                     try
                     {
-                        Thread.sleep(3000);
+                        Thread.sleep(30000);
                         serverUDP.setListMatch(listMatch);
                         // Si on est pas en train de créer un match
-                        if (getSelectedIndex()>0)
+                        if (getSelectedIndex() > 0)
                         {
-                            update();  
-                        }                      
+                            update();
+                            controlJcombobox();
+                        }
                     } catch (InterruptedException e)
                     {
                         // Arret du thread
@@ -235,11 +250,10 @@ public class JTabPaneServer extends JTabbedPane
     private void update()
     {
         int i = getSelectedIndex();
-        // int j = jPanelEventMatch.getJcombobox().getSelectedIndex();
         geometry();
         control();
-        appareance();
+        appareance();        
         setSelectedIndex(i);
-        // jPanelEventMatch.getJcombobox().setSelectedIndex(j);
+        jPanelEventMatch.getJcombobox().setSelectedIndex(indexMatch);
     }
 }
