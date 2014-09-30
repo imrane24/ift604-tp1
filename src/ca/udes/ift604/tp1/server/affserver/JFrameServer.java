@@ -52,7 +52,7 @@ public class JFrameServer extends JFrame
     private void appareance()
     {
         setTitle("HockeyLive : La soirée du hockey");
-        setLocation(600, 200);
+        setLocation(300, 200);
         setSize(600, 480);
         setResizable(true);
         setVisible(true);

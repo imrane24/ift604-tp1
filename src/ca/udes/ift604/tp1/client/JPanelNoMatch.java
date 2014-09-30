@@ -39,7 +39,7 @@ public class JPanelNoMatch extends JPanel
     private void geometry()
     {
         jButtonUpdate = new JButton("Actualiser");
-        jLabelError = new JLabel("Erreur, Pas de match disponible\n Cliquer sur Actualiser pour réessayer");
+        jLabelError = new JLabel("<html>Erreur, Pas de match disponible. <br>Cliquer sur Actualiser pour réessayer</html>", JLabel.CENTER);
         setLayout(new BorderLayout());
 
         add(jLabelError, BorderLayout.CENTER);
@@ -48,7 +48,7 @@ public class JPanelNoMatch extends JPanel
 
     private void control()
     {
-
+        // Rien
     }
 
     private void appareance()

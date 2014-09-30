@@ -5,7 +5,6 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.InetAddress;
 
-import javax.swing.JButton;
 import javax.swing.JTabbedPane;
 
 import ca.udes.ift604.tp1.client.affbet.JPanelBet;
@@ -31,6 +30,7 @@ public class JTabPaneClient extends JTabbedPane
     private ClientTCP clientTCP;
 
     private String nameMatch;
+    private boolean firstUpdate;
 
     /*------------------------------------------------------------------*\
     |*							Constructeurs							*|
@@ -43,6 +43,7 @@ public class JTabPaneClient extends JTabbedPane
         ip = InetAddress.getByName(ipServer);
         clientUDP = new ClientUDP(ip, portServerUDP);
         clientUDP.start("update");
+        firstUpdate = true;
 
         if (clientUDP.getListMatch().size() == 0)
         {
@@ -139,11 +140,6 @@ public class JTabPaneClient extends JTabbedPane
         setForeground(ColorPalette.FOREGROUND_COLOR);
     }
 
-    public JButton getjButtonUpdate()
-    {
-        return jPanelMatch.getjButtonUpdate();
-    }
-
     public void setNameMatch(String nameMatch)
     {
         this.nameMatch = nameMatch;
@@ -166,12 +162,17 @@ public class JTabPaneClient extends JTabbedPane
                 geometryNoMatch();
             } else
             {
-//                if (jPanelListMatch.isSelectMatch())
-//                {
-//                    nameMatch = jPanelListMatch.getNameMatch();
-//                    jPanelListMatch.setSelectMatch(false);
-//                }
-                nameMatch = clientUDP.getListMatch().get(0).getName();
+                System.out.println("Avant : " + nameMatch);
+
+                if (firstUpdate)
+                {
+                    nameMatch = clientUDP.getListMatch().get(0).getName();
+                    firstUpdate = false;
+                } else if (jPanelListMatch.isSelectMatch())
+                {
+                    nameMatch = jPanelListMatch.getNameMatch();
+                    jPanelListMatch.setSelectMatch(false);
+                }
 
                 geometry();
                 control();

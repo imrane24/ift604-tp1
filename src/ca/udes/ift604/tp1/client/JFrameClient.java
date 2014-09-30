@@ -54,7 +54,7 @@ public class JFrameClient extends JFrame
     private void appareance()
     {
         setTitle("HockeyLive : La soirée du hockey");
-        setLocation(600, 200);
+        setLocation(900, 200);
         setSize(600, 480);
         setResizable(true);
         setVisible(true);
