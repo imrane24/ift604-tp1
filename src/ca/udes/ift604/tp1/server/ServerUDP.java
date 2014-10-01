@@ -83,7 +83,10 @@ public class ServerUDP
 
     public void setListMatch(List<Match> listMatch)
     {
-        this.listMatch = listMatch;
+        synchronized (listMatch)
+        {
+            this.listMatch = listMatch;
+        }
     }
 
     /*------------------------------------------------------------------*\
