@@ -70,6 +70,11 @@ public class Bet implements Serializable
         return teamBet;
     }
 
+    public int getNumMatch()
+    {
+        return match.getNumMatch();
+    }
+
     /*------------------------------------------------------------------*\
     |*                          Attributs Private                       *|
     \*------------------------------------------------------------------*/

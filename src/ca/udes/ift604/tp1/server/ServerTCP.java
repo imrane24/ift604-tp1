@@ -17,7 +17,11 @@ public class ServerTCP
     public ServerTCP(int port) throws IOException
     {
         socket = new ServerSocket(port);
-        listBet = new ListBet();
+        for (int i = 0; i < 10; i++)
+        {
+            listBet = new ListBet[i];
+
+        }
     }
 
     /*------------------------------------------------------------------*\
@@ -86,10 +90,10 @@ public class ServerTCP
 
                 if (teamBet == bet.getMatch().getTeam1())
                 {
-                    listBet.SetBetTeam1(bet);
+                    listBet[bet.getNumMatch()].SetBetTeam1(bet);
                 } else
                 {
-                    listBet.SetBetTeam2(bet);
+                    listBet[bet.getNumMatch()].SetBetTeam2(bet);
                 }
 
                 // Envoie de confirmation au client
@@ -97,7 +101,7 @@ public class ServerTCP
                 printWriter.println("M. " + bet.getUser().getLogin() + " vous avez misé : $" + bet.getBet() + " sur l'équipe : " + bet.getTeamBet());
                 printWriter.flush();
                 System.out.println("Pari sur l'équipe :" + bet.getTeamBet() + " Somme du pari : $" + bet.getBet());
-                essaivalidation();
+                // essaivalidation();
             } else
             {
                 // Envoie d'une erreur au client
@@ -109,14 +113,14 @@ public class ServerTCP
 
         }
 
-        private void essaivalidation()
-        {
-            System.out.println("nombre de pari: " + listBet.getSizeListTot());
-            System.out.println("Somme des paris: " + listBet.getSommeTotal());
-            System.out.println("Pari Team1 : " + listBet.getSizeList1());
-            System.out.println("Pari Team2 : " + listBet.getSizeList2());
-
-        }
+        // private void essaivalidation()
+        // {
+        // System.out.println("nombre de pari: " + listBet.getSizeListTot());
+        // System.out.println("Somme des paris: " + listBet.getSommeTotal());
+        // System.out.println("Pari Team1 : " + listBet.getSizeList1());
+        // System.out.println("Pari Team2 : " + listBet.getSizeList2());
+        //
+        // }
 
     }
 
@@ -129,6 +133,6 @@ public class ServerTCP
     private int nbrclient = 1;
     private Bet bet;
     private PrintWriter printWriter;
-    private ListBet listBet;
+    private ListBet[] listBet;
 
 }

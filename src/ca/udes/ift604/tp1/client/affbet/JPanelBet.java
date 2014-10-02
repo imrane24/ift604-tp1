@@ -39,12 +39,27 @@ public class JPanelBet extends JPanel
     {
         return jPanelCenter.getjButtonValidate();
     }
-    
+
     public Bet getBet()
     {
         return new Bet(match, new User(jPanelCenter.getLoginBet()), jPanelCenter.getSommeBet(), jPanelCenter.getTeamBet());
     }
-    
+
+    public String getLoginBet()
+    {
+        return jPanelCenter.getLoginBet();
+    }
+
+    public int getSommeBet()
+    {
+        return jPanelCenter.getSommeBet();
+    }
+
+    public String getTeamBet()
+    {
+        return jPanelCenter.getTeamBet();
+    }
+
     /*------------------------------------------------------------------*\
     |*							Methodes Private						*|
     \*------------------------------------------------------------------*/

@@ -26,6 +26,7 @@ public class Match implements Serializable
     private StateMatch state;
     private Chrono chrono;
     private String name;
+    private int numMatch;
 
     public enum StateMatch
     {
@@ -172,23 +173,14 @@ public class Match implements Serializable
 
     /*
      * public void setButEquipe1(int butEquipe1) { this.butEquipe1 = butEquipe1;
-     * }
-     * 
-     * public void setButEquipe2(int butEquipe2) { this.butEquipe2 = butEquipe2;
-     * }
-     * 
-     * public void setPenaliteEquipe1(int penaliteEquipe1) {
-     * this.penaliteEquipe1 = penaliteEquipe1; }
-     * 
-     * public void setPenaliteEquipe2(int penaliteEquipe2) {
-     * this.penaliteEquipe2 = penaliteEquipe2; }
-     * 
-     * public void setEquipe1(Equipe equipe1) { this.equipe1 = equipe1; }
-     * 
-     * public void setEquipe2(Equipe equipe2) { this.equipe2 = equipe2; }
-     * 
-     * public void setTiersTemps(int tiersTemps) { this.tiersTemps = tiersTemps;
-     * }
+     * } public void setButEquipe2(int butEquipe2) { this.butEquipe2 =
+     * butEquipe2; } public void setPenaliteEquipe1(int penaliteEquipe1) {
+     * this.penaliteEquipe1 = penaliteEquipe1; } public void
+     * setPenaliteEquipe2(int penaliteEquipe2) { this.penaliteEquipe2 =
+     * penaliteEquipe2; } public void setEquipe1(Equipe equipe1) { this.equipe1
+     * = equipe1; } public void setEquipe2(Equipe equipe2) { this.equipe2 =
+     * equipe2; } public void setTiersTemps(int tiersTemps) { this.tiersTemps =
+     * tiersTemps; }
      */
 
     public void setDate(Date date)
@@ -214,11 +206,12 @@ public class Match implements Serializable
     {
         return listGoal1;
     }
+
     public List<Goal> getlistGoal2()
     {
         return listGoal2;
     }
-    
+
     public int getPenaltyTeam1()
     {
         return penaltyTeam1;
@@ -262,6 +255,11 @@ public class Match implements Serializable
     public StateMatch getStateMatch()
     {
         return state;
+    }
+
+    public int getNumMatch()
+    {
+        return numMatch;
     }
 
     /*------------------------------------------------------------------*\

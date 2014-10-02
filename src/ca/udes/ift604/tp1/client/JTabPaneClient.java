@@ -9,6 +9,8 @@ import javax.swing.JTabbedPane;
 
 import ca.udes.ift604.tp1.client.affbet.JPanelBet;
 import ca.udes.ift604.tp1.client.affmatch.JPanelMatch;
+import ca.udes.ift604.tp1.match.User;
+import ca.udes.ift604.tp1.server.Bet;
 import ca.udes.ift604.tp1.tools.ColorPalette;
 
 public class JTabPaneClient extends JTabbedPane
@@ -31,6 +33,7 @@ public class JTabPaneClient extends JTabbedPane
 
     private String nameMatch;
     private boolean firstUpdate;
+    private Bet bet;
 
     /*------------------------------------------------------------------*\
     |*							Constructeurs							*|
@@ -122,9 +125,11 @@ public class JTabPaneClient extends JTabbedPane
             @Override
             public void actionPerformed(ActionEvent arg0)
             {
+                Bet bet = new Bet(clientUDP.getMatch(nameMatch), new User(jPanelBet.getLoginBet()), jPanelBet.getSommeBet(), jPanelBet.getTeamBet());
                 try
                 {
-                    clientTCP = new ClientTCP(ip, portServerTCP, jPanelBet.getBet());
+                    clientTCP = new ClientTCP(ip, portServerTCP, bet);
+                    clientTCP.start();
                 } catch (IOException e)
                 {
                     System.err.println("Error Client TCP");
