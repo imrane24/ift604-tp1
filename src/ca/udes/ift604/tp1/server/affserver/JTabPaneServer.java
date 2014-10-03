@@ -31,6 +31,7 @@ public class JTabPaneServer extends JTabbedPane
     private List<Match> listMatch;
     private int indexMatch = 0;
     private Goal goal;
+    private int numMatch;
 
     /*------------------------------------------------------------------*\
     |*							Constructeurs							*|
@@ -38,6 +39,7 @@ public class JTabPaneServer extends JTabbedPane
 
     public JTabPaneServer(int portServerUDP, int portServerTCP) throws IOException
     {
+        numMatch = 0;
         listMatch = new ArrayList<Match>();
         goal = new Goal(8000, "Jean", "Fred", "Claude");
 
@@ -183,7 +185,14 @@ public class JTabPaneServer extends JTabbedPane
             public void actionPerformed(ActionEvent arg0)
             {
                 listMatch.add(new Match(jPanelCreateMatch.getDate(), jPanelCreateMatch.getTeam1(), jPanelCreateMatch.getTeam2(), jPanelCreateMatch
-                        .getNameMatch()));
+                        .getNameMatch(), numMatch));
+                if (numMatch < 10)
+                {
+                    numMatch++;
+                } else
+                {
+                    numMatch = 0;
+                }
                 update();
                 controlJcombobox();
             }
@@ -206,7 +215,7 @@ public class JTabPaneServer extends JTabbedPane
             public void actionPerformed(ActionEvent event)
             {
                 indexMatch = jPanelEventMatch.getIndexMatch();
-                update();               
+                update();
             }
         });
     }
@@ -252,7 +261,7 @@ public class JTabPaneServer extends JTabbedPane
         int i = getSelectedIndex();
         geometry();
         control();
-        appareance();        
+        appareance();
         setSelectedIndex(i);
         jPanelEventMatch.getJcombobox().setSelectedIndex(indexMatch);
     }

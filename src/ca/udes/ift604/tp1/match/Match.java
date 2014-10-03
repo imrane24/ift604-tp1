@@ -37,12 +37,13 @@ public class Match implements Serializable
     |*                          Constructeurs                           *|
     \*------------------------------------------------------------------*/
 
-    public Match(Date date, String team1, String team2, String name)
+    public Match(Date date, String team1, String team2, String name, int numMatch)
     {
         this.date = date;
         this.team1 = team1;
         this.team2 = team2;
         this.name = name;
+        this.numMatch = numMatch;
         goalTeam1 = 0;
         goalTeam2 = 0;
         listGoal1 = new ArrayList<Goal>();

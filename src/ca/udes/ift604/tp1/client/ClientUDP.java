@@ -96,7 +96,7 @@ public class ClientUDP
         if (index == -1)
         {
             System.out.println("Erreur de la requette");
-            return new Match(new Date(), "Error", "Error", "Error");
+            return new Match(new Date(), "Error", "Error", "Error",-1);
         } else
         {
             return listMatch.get(index);
