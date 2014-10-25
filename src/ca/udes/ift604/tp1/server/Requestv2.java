@@ -9,7 +9,7 @@ import java.util.List;
 import ca.udes.ift604.tp1.match.Match;
 import ca.udes.ift604.tp1.tools.Tools;
 
-public class Request implements Runnable
+public class Requestv2 implements Runnable
 {
     /*------------------------------------------------------------------*\
     |*                          Attributs Private                       *|
@@ -28,7 +28,7 @@ public class Request implements Runnable
     |*                          Constructeurs                           *|
     \*------------------------------------------------------------------*/
 
-    public Request(DatagramSocket serverSocket, DatagramPacket receivePacket, List<Match> listMatch) throws SocketException
+    public Requestv2(DatagramSocket serverSocket, DatagramPacket receivePacket, List<Match> listMatch) throws SocketException
     {
         this.receivePacket = receivePacket;
         this.serverSocket = serverSocket;
@@ -57,26 +57,21 @@ public class Request implements Runnable
                 DatagramPacket sizeListPacket = new DatagramPacket(sendBuffer, sendBuffer.length, receivePacket.getAddress(), receivePacket.getPort());
                 serverSocket.send(sizeListPacket);
 
-                // On envoi la liste complete
-                for (Match element : listMatch)
-                {                    
-                    try
-                    {
-                        Thread.sleep(5000);
-                    } catch (InterruptedException e)
-                    {
-                        // TODO Auto-generated catch block
-                        e.printStackTrace();
-                    }
-                    
-                    sendBuffer = Tools.serealizer(element);
+            } else if (request.contains("ok"))
+            {
+                int index = request.indexOf("ok") + 2;
+                int num = Character.getNumericValue(request.charAt(index));
+
+                if (num < listMatch.size())
+                {
+                    System.out.println("Envoi match" + num);
+
+                    // On envoi la liste complete
+                    sendBuffer = Tools.serealizer(listMatch.get(num));
 
                     DatagramPacket replyPacket = new DatagramPacket(sendBuffer, sendBuffer.length, receivePacket.getAddress(), receivePacket.getPort());
                     serverSocket.send(replyPacket);
-                System.out.println("Envoi match");
-                
                 }
-
             }
 
         } catch (IOException e)

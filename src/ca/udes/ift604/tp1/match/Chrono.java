@@ -2,10 +2,14 @@ package ca.udes.ift604.tp1.match;
 
 import java.io.Serializable;
 
-@SuppressWarnings("serial")
 public class Chrono implements Serializable
 {
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -9159146217082064149L;
+    
     /*------------------------------------------------------------------*\
     |*							Constructeurs							*|
     \*------------------------------------------------------------------*/

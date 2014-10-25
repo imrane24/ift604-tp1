@@ -7,9 +7,9 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import ca.udes.ift604.tp1.match.Bet;
 import ca.udes.ift604.tp1.match.Match;
 import ca.udes.ift604.tp1.match.User;
-import ca.udes.ift604.tp1.server.Bet;
 import ca.udes.ift604.tp1.tools.ColorPalette;
 
 public class JPanelBet extends JPanel

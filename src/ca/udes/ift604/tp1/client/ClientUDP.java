@@ -59,6 +59,10 @@ public class ClientUDP
 
             int sizeList = (Integer) Tools.deserealizer(sizeListPacket.getData());
 
+            sendBuffer = new String("ok0").getBytes();
+            sendPacket = new DatagramPacket(sendBuffer, sendBuffer.length, serverAddress, serverPort);
+            clientSocket.send(sendPacket);
+            
             // On reçoit la liste complete
             listMatch = new ArrayList<Match>();
             for (int i = 0; i < sizeList; i++)
@@ -68,6 +72,10 @@ public class ClientUDP
                 clientSocket.receive(replyPacket);
 
                 listMatch.add((Match) Tools.deserealizer(replyPacket.getData()));
+                
+                sendBuffer = new String("ok" + i).getBytes();
+                sendPacket = new DatagramPacket(sendBuffer, sendBuffer.length, serverAddress, serverPort);
+                clientSocket.send(sendPacket);
             }
 
         } catch (Exception e)

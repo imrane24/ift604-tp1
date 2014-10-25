@@ -1,13 +1,14 @@
-package ca.udes.ift604.tp1.server;
+package ca.udes.ift604.tp1.match;
 
 import java.io.Serializable;
 
-import ca.udes.ift604.tp1.match.Match;
-import ca.udes.ift604.tp1.match.User;
-
 public class Bet implements Serializable
 {
-
+ 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -4872230612930077638L;
     /*------------------------------------------------------------------*\
     |*                          Constructeurs                           *|
     \*------------------------------------------------------------------*/

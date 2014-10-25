@@ -2,6 +2,8 @@ package ca.udes.ift604.tp1.server;
 
 import java.util.ArrayList;
 
+import ca.udes.ift604.tp1.match.Bet;
+
 public class ListBet
 {
     /*------------------------------------------------------------------*\

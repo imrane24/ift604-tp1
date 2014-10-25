@@ -9,8 +9,8 @@ import javax.swing.JTabbedPane;
 
 import ca.udes.ift604.tp1.client.affbet.JPanelBet;
 import ca.udes.ift604.tp1.client.affmatch.JPanelMatch;
+import ca.udes.ift604.tp1.match.Bet;
 import ca.udes.ift604.tp1.match.User;
-import ca.udes.ift604.tp1.server.Bet;
 import ca.udes.ift604.tp1.tools.ColorPalette;
 
 public class JTabPaneClient extends JTabbedPane

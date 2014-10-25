@@ -49,7 +49,7 @@ public class ServerUDP
             {
                 DatagramPacket requestPacket = new DatagramPacket(buffer, buffer.length);
                 serverSocket.receive(requestPacket);
-                pool.execute(new Request(serverSocket, requestPacket, listMatch));
+                pool.execute(new Requestv2(serverSocket, requestPacket, listMatch));
             }
 
         } catch (Exception e)

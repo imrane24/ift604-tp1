@@ -7,6 +7,8 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import ca.udes.ift604.tp1.match.Bet;
+
 public class ServerTCP
 {
 

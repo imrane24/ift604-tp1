@@ -9,7 +9,7 @@ import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-import ca.udes.ift604.tp1.server.Bet;
+import ca.udes.ift604.tp1.match.Bet;
 
 public class ClientTCP
 {
