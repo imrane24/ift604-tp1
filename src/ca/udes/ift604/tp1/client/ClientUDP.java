@@ -58,7 +58,7 @@ public class ClientUDP
             clientSocket.receive(sizeListPacket);
 
             int sizeList = (Integer) Tools.deserealizer(sizeListPacket.getData());
-
+            
             sendBuffer = new String("ok0").getBytes();
             sendPacket = new DatagramPacket(sendBuffer, sendBuffer.length, serverAddress, serverPort);
             clientSocket.send(sendPacket);
@@ -73,7 +73,7 @@ public class ClientUDP
 
                 listMatch.add((Match) Tools.deserealizer(replyPacket.getData()));
                 
-                sendBuffer = new String("ok" + i).getBytes();
+                sendBuffer = new String("ok" + (i+1)).getBytes();
                 sendPacket = new DatagramPacket(sendBuffer, sendBuffer.length, serverAddress, serverPort);
                 clientSocket.send(sendPacket);
             }

@@ -19,11 +19,13 @@ public class ServerTCP
     public ServerTCP(int port) throws IOException
     {
         socket = new ServerSocket(port);
+
+        listBet = new ListBet[10];
+        
         for (int i = 0; i < 10; i++)
         {
-            listBet = new ListBet[i];
-
-        }
+            listBet[i] = new ListBet();
+        }        
     }
 
     /*------------------------------------------------------------------*\
@@ -62,8 +64,8 @@ public class ServerTCP
                     {
                         // bet = new Bet(null, null, nbrclient, null);
                         bet = (Bet) serverInptStream.readObject();
-
                         validateBet();
+
                     } catch (ClassNotFoundException e)
                     {
                         e.printStackTrace();
@@ -84,7 +86,6 @@ public class ServerTCP
 
         private void validateBet() throws IOException
         {
-
             if (bet.getMatch().getPeriod() < 2) // Pari effectué dans les 2
                                                 // première mi-temps
             {
@@ -92,6 +93,14 @@ public class ServerTCP
 
                 if (teamBet == bet.getMatch().getTeam1())
                 {
+                    if (bet==null)
+                    {
+                        System.out.println("Bet NULL");
+                    }
+                    if (listBet[0]==null)
+                    {
+                        System.out.println("ListBet Null");
+                    }
                     listBet[bet.getNumMatch()].SetBetTeam1(bet);
                 } else
                 {

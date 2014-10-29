@@ -25,7 +25,6 @@ public class ListBet
     {
         listBetTeam1.add(bet);
         sommeTotal += bet.getBet();
-
     }
 
     public void SetBetTeam2(Bet bet)
